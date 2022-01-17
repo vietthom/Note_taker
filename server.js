@@ -8,12 +8,16 @@ app.use('/', express.static(path.join(__dirname, '/Develop/public')));
 
 
 
-router.get('/notes', (req, res) => {
+router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, './Develop/public', 'index.html'));
 });
 
+router.get('/notes', (req, res) => {
+    res.sendFile(path.join(__dirname, './Develop/public', 'notes.html'));
+});
 
 app.use('/', router);
+app.use('/notes', router);
 
 app.listen(port);
 
