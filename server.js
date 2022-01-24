@@ -58,8 +58,10 @@ for (let i =0; i<notesArray.length; i++){
 }
 };
 
-
-
+app.delete('/api/notes/:id', (req, res)=>{
+    deleteNote(req.params.id, allNotes);
+    res.json(true);
+});
 
 
 app.listen(PORT, console.log('Listening on PORT 3000'));
