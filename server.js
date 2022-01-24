@@ -1,5 +1,5 @@
 const express = require('express');
-const { fsyncSync } = require('fs');
+const fs = require('fs');
 const app= express();
 const path = require('path');
 const PORT = process.env.PORT || 3000;
@@ -11,6 +11,10 @@ app.use(express.json());
 
 //Middleware to render static files
 app.use('/', express.static(path.join(__dirname, '/Develop/public')));
+
+app.get('/api/notes', (req, res) =>{
+    res.json(dataBase.slice(1));
+})
 
 //Display index.html files
 app.get('/', (req, res) => {
@@ -41,7 +45,7 @@ function createNewNote(body, notesArray){
 
 
 app.post('api/notes', (req, res) => {
-    const newPost= createNewNote(req.body, allNotes);
+    const newPost= createNewNote(req.body, dataBase);
     res.json(newPost);
 });
 
@@ -59,7 +63,7 @@ for (let i =0; i<notesArray.length; i++){
 };
 
 app.delete('/api/notes/:id', (req, res)=>{
-    deleteNote(req.params.id, allNotes);
+    deleteNote(req.params.id, dataBase);
     res.json(true);
 });
 
