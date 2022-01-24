@@ -40,10 +40,14 @@ function createNewNote(body, notesArray){
 };
 
 
-
 app.post('api/notes', (req, res) => {
-    console.log('request.body');
+    const newPost= createNewNote(req.body, allNotes);
+    res.json(newPost);
 });
+
+function deleteNote(id, notesArray){
+
+}
 
 
 
