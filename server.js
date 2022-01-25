@@ -36,7 +36,7 @@ function createNewNote(body, notesArray){
     body.id = notesArray[0];
     notesArray[0]++;
 
-    notesArray.push(newNote);
+    notesArray.push(newNotes);
     fsyncSync.writeFileSync(path.join(__dirname, './develop/db/db.json'), 
     json.stringify(notesArray, null, 2)
     );
@@ -44,7 +44,7 @@ function createNewNote(body, notesArray){
 };
 
 
-app.post('api/notes', (req, res) => {
+app.post('/api/notes', (req, res) => {
     const newPost= createNewNote(req.body, dataBase);
     res.json(newPost);
 });
